@@ -24,10 +24,48 @@
     notimportant2 = document.querySelectorAll('.optionalexpenses-item')[2];
     //нижняя часть сайта
     const getnotimp = document.querySelector('.choose-income');
-        getcheckbox = document.querySelector('.checksavings');
-        getsumm = document.querySelector('.choose-sum');
-        getprocent = document.querySelector('.choose-percent');
-        getyear = document.querySelector('.year');
-        getmonth = document.querySelector('.month');
-        getday = document.querySelector('.day')
-        console.log(getmonth)
+    getcheckbox = document.querySelector('.checksavings');
+    getsumm = document.querySelector('.choose-sum');
+    getprocent = document.querySelector('.choose-percent');
+    getyear = document.querySelector('.year-value');
+    getmonth = document.querySelector('.month-value');
+    getday = document.querySelector('.day-value');
+    let money, time;
+    getButtonItog.addEventListener('click', function () {
+        time = prompt('Введите дату');
+        money = prompt('Ваш бюджет');
+        while (isNaN(money) || money == '' || money == null) {
+            money = prompt('Введите ваш бюджет', "")
+        }
+        appData.budget = money;
+        appData.timeData = time;
+        ResultTable.textContent = money;
+        getyear.value = new Date(Date.parse(time)).getFullYear();
+        getmonth.value = new Date(Date.parse(time)).getMonth() + 1;
+        getday.value = new Date(Date.parse(time)).getDay();
+
+    });
+
+    let appData = {
+        budget: money,
+        expenses: {},
+        optionalexpenses: {},
+        income: [],
+        timeData: time,
+        savings: true,
+    };
+
+    button3.addEventListener('click', function(){
+        moneyoneday = (appData.budget/30).toFixed();
+        ResultTable2.textContent = moneyoneday;
+
+        if (appData.budget > 100){
+            ResultTable3.textContent = 'Хороший уровень достатка';
+        } else if (appData.budget < 100){
+            ResultTable3.textContent = 'Низкий уровень достатка';
+        } else{
+            ResultTable3.textContent = 'Произошла ошибка';
+        }
+    })
+
+    
